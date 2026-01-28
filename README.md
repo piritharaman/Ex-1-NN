@@ -43,59 +43,66 @@ import io
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
-data = pd.read_csv("Churn_Modelling.csv")
-print(data.head())
-print(data.tail())
-X=data.iloc[:,:-1].values
+
+df= pd.read_csv("Churn_Modelling.csv")
+print(df)
+
+X=df.iloc[:,:-1].values
 print(X)
-y=data.iloc[:,-1].values
+
+y=df.iloc[:,-1].values
 print(y)
-data.info()
-print("Missing Values: \n ",data.isnull().sum())
-print("Duplicate values:\n ")
-print(data.duplicated())
-data.describe()
-data = data.drop(['Surname', 'Geography','Gender'], axis=1)
-data.head()
+
+print(df.isnull().sum())
+df.fillna(df.select_dtypes(include='number').mean(), inplace=True)
+
+print(df.isnull().sum())
+y=df.iloc[:,-1].values
+print(y)
+
+df.duplicated()
+print(df['EstimatedSalary'].describe())
+
 scaler=MinMaxScaler()
-df1=pd.DataFrame(scaler.fit_transform(data))
+df1 = pd.DataFrame(
+    scaler.fit_transform(df.select_dtypes(include='number')),
+    columns=df.select_dtypes(include='number').columns
+)
 print(df1)
-X = data.drop('Exited', axis=1)  
-y = data['Exited'] 
-X_train ,X_test ,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=42)
-print("Training data")
+
+X_train ,X_test ,y_train,y_test=train_test_split(X,y,test_size=0.2)
+
 print(X_train)
-print(y_train)
-print("Testing data")
+print(len(X_train))
 print(X_test)
-print(y_test)
-print("Length of X_test: ", len(X_test))
+print("Lenght of X_test ",len(X_test))
 ```
 
 ## OUTPUT:
 ### Dataset
-<img width="669" height="225" alt="image" src="https://github.com/user-attachments/assets/ca7255a7-537e-4e3c-91ea-a78decfa5468" />
+<img width="925" height="735" alt="image" src="https://github.com/user-attachments/assets/126c7b4e-afb1-47f9-bdbc-c1af0ca2cb5e" />
 
 ### X values
-<img width="379" height="128" alt="image" src="https://github.com/user-attachments/assets/463e4da8-5aac-41d0-830a-777aaee50b60" />
+<img width="923" height="157" alt="image" src="https://github.com/user-attachments/assets/d904b45f-a856-4812-a330-63aa91a90195" />
 
 ### Y values
-<img width="142" height="26" alt="image" src="https://github.com/user-attachments/assets/4dfd1672-62c1-4963-bf4f-4b24d673210d" />
+<img width="937" height="67" alt="image" src="https://github.com/user-attachments/assets/f0cae57c-e627-4ae7-86fc-2045500abfe0" />
 
 ### Null values
-<img width="217" height="282" alt="image" src="https://github.com/user-attachments/assets/0916117b-3167-440f-b10f-dcff40d1387f" />
+<img width="917" height="257" alt="image" src="https://github.com/user-attachments/assets/03a7db78-ec1e-4610-ae78-0c38377da415" />
 
-### Duplicated values
-<img width="245" height="240" alt="image" src="https://github.com/user-attachments/assets/aa741c53-21e7-4f7d-8999-83310fe5aab5" />
+<img width="926" height="317" alt="image" src="https://github.com/user-attachments/assets/c1fe7e92-c08f-4b11-bcff-1425f2e5ce47" />
 
-### Description
-<img width="619" height="408" alt="image" src="https://github.com/user-attachments/assets/9fba2902-3875-41c5-980f-c3b5072a0334" />
+
+### Duplicated values and Description
+<img width="922" height="177" alt="image" src="https://github.com/user-attachments/assets/3df8d7a4-facb-4029-a730-1377e5888881" />
+
 
 ### Training Data
-<img width="549" height="327" alt="image" src="https://github.com/user-attachments/assets/7afc6eae-45bb-431a-9de9-e05418114cda" />
+<img width="916" height="495" alt="image" src="https://github.com/user-attachments/assets/d5331fc8-2f2f-4187-822b-7fca9909d1f6" />
 
 ### Testing data
-<img width="535" height="329" alt="image" src="https://github.com/user-attachments/assets/9c41e124-4d44-4eed-9e62-02b022ed2733" />
+<img width="932" height="342" alt="image" src="https://github.com/user-attachments/assets/82809df6-4847-42a0-a5f5-49bf2eaaf07e" />
 
 
 
