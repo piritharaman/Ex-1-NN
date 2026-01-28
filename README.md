@@ -1,7 +1,7 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
-<H3>EX. NO.1</H3>
-<H3>DATE</H3>
+<H3>NAME: PIRITHARAMAN R</H3>
+<H3>REGISTER NO: 212223230148</H3>
+<H3>EX.NO.1</H3>
+<H3>DATE: 28/01/26</H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
 ## AIM:
@@ -37,11 +37,66 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
-
+```
+import pandas as pd
+import io
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+data = pd.read_csv("Churn_Modelling.csv")
+print(data.head())
+print(data.tail())
+X=data.iloc[:,:-1].values
+print(X)
+y=data.iloc[:,-1].values
+print(y)
+data.info()
+print("Missing Values: \n ",data.isnull().sum())
+print("Duplicate values:\n ")
+print(data.duplicated())
+data.describe()
+data = data.drop(['Surname', 'Geography','Gender'], axis=1)
+data.head()
+scaler=MinMaxScaler()
+df1=pd.DataFrame(scaler.fit_transform(data))
+print(df1)
+X = data.drop('Exited', axis=1)  
+y = data['Exited'] 
+X_train ,X_test ,y_train,y_test=train_test_split(X,y,test_size=0.2,random_state=42)
+print("Training data")
+print(X_train)
+print(y_train)
+print("Testing data")
+print(X_test)
+print(y_test)
+print("Length of X_test: ", len(X_test))
+```
 
 ## OUTPUT:
-SHOW YOUR OUTPUT HERE
+### Dataset
+<img width="669" height="225" alt="image" src="https://github.com/user-attachments/assets/ca7255a7-537e-4e3c-91ea-a78decfa5468" />
+
+### X values
+<img width="379" height="128" alt="image" src="https://github.com/user-attachments/assets/463e4da8-5aac-41d0-830a-777aaee50b60" />
+
+### Y values
+<img width="142" height="26" alt="image" src="https://github.com/user-attachments/assets/4dfd1672-62c1-4963-bf4f-4b24d673210d" />
+
+### Null values
+<img width="217" height="282" alt="image" src="https://github.com/user-attachments/assets/0916117b-3167-440f-b10f-dcff40d1387f" />
+
+### Duplicated values
+<img width="245" height="240" alt="image" src="https://github.com/user-attachments/assets/aa741c53-21e7-4f7d-8999-83310fe5aab5" />
+
+### Description
+<img width="619" height="408" alt="image" src="https://github.com/user-attachments/assets/9fba2902-3875-41c5-980f-c3b5072a0334" />
+
+### Training Data
+<img width="549" height="327" alt="image" src="https://github.com/user-attachments/assets/7afc6eae-45bb-431a-9de9-e05418114cda" />
+
+### Testing data
+<img width="535" height="329" alt="image" src="https://github.com/user-attachments/assets/9c41e124-4d44-4eed-9e62-02b022ed2733" />
+
 
 
 ## RESULT:
